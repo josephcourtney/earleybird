@@ -11,7 +11,7 @@ wheels = [
 ]
 
 [[package]]
-name = "earley"
+name = "earleybird"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

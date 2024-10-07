@@ -1,19 +1,18 @@
 # ruff: noqa: S101
-from earley_parser import EarleyParser, Grammar, Rule
+from earleybird import EarleyParser, Grammar, Rule
 
 
 def state_in_chart(chart, position, lhs, rhs, dot, start):
     """Check if a state is in the chart at the given position."""
-    for state in chart[position].values():
-        # We check if the LHS matches and if the RHS starts with the expected symbols up to the dot position
-        if (
+    return any(
+        (
             state.rule.lhs == lhs
             and state.rule.rhs[:dot] == rhs[:dot]  # Match RHS up to the dot position
             and state.dot == dot
             and state.start == start
-        ):
-            return True
-    return False
+        )
+        for state in chart[position].values()
+    )
 
 
 def test_left_recursion():
